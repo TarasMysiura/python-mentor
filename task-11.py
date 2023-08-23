@@ -9,13 +9,14 @@ screen_height = my_calc.winfo_screenheight()
 # print(screen_width, screen_height)
 
 # Вычисляем координаты окна приложения
-window_width = 500
+window_width = 530
 window_height = 400
 x = (screen_width // 2) - (window_width // 2)
 y = (screen_height // 2) - (window_height // 2)
 my_calc.geometry(f"{window_width}x{window_height}+{x}+{y}")
+
 font_btn = ("Times", "30", "bold")
-font_entry_text = ("Times", "30", "bold")
+font_entry_text = ("Times", "25", "bold")
 
 width_btn = int(window_width / 125)
 height_btn = int(window_height / 250)
@@ -25,51 +26,40 @@ height_btn = int(window_height / 250)
 number = 0
 
 
-def add_digit(digit):  # функция для ввода цифры
-    global number  # чтобы менять глобальную переменную, пишем global
-    number = number * 10 + digit  # допишем нужную цифру справа
-    entry_text.set(number)  # запишемо число в поле введення
-
-
+def add_digit(digit): 
+    global number  
+    number = number * 10 + digit  
+    entry_text.set(number) 
+    
 def button_press_1():
     add_digit(1)
-
 
 def button_press_2():
     add_digit(2)
 
-
 def button_press_3():
     add_digit(3)
-
 
 def button_press_4():
     add_digit(4)
 
-
 def button_press_5():
     add_digit(5)
-
 
 def button_press_6():
     add_digit(6)
 
-
 def button_press_7():
     add_digit(7)
-
 
 def button_press_8():
     add_digit(8)
 
-
 def button_press_9():
     add_digit(9)
 
-
 def button_press_0():
     add_digit(0)
-
 
 Button(
     my_calc,
