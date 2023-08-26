@@ -21,45 +21,147 @@ font_entry_text = ("Times", "25", "bold")
 width_btn = int(window_width / 125)
 height_btn = int(window_height / 250)
 
-#  запомним, какое число записано в поле ввода
+# запомним, какое число записано в поле ввода
 # изначально это ноль
 number = 0
+# а это прошлое число в памяти - и тоже сначала ноль
+previous_number = 0
+
+# выбранное действие
+# пускай по-умолчанию это будет плюс
+# action = '+'
 
 
-def add_digit(digit): 
-    global number  
-    number = number * 10 + digit  
-    entry_text.set(number) 
+# параметр - выбранное действие
+def make_action(chosen_action):
+    global number
+    global previous_number
+    global action
+
+    # запоминаем выбранное действие
+    action = chosen_action
+
+    # запоминаем текущее число
+    previous_number = number
+
+    # и кладем ноль в текущее - пользователю нужно его ввести
+    number = 0
+
+    # показываем текущее на экране
+    entry_text.set(str(number))
+
+
+# функция для сложения
+def button_press_add():
+    # выбранное действие - это сложение
+    # make_action("+")
+    global number
+    global previous_number
+    global action
+
+    # запоминаем выбранное действие
+    action = "+"
+
+    # запоминаем текущее число
+    previous_number = number
+
+    # и кладем ноль в текущее - пользователю нужно его ввести
+    number = 0
+
+    # показываем текущее на экране
+    entry_text.set("")
     
+    
+
+# # функция для вычитания
+# def button_press_substract():
+#     # выбранное действие - это сложение
+#     make_action('-')
+
+# # функция для умножения
+# def button_press_multiply():
+#     make_action('*')
+
+# # функция для деления
+# def button_press_divide():
+#     make_action('/')
+
+# # функция для очистки (AC)
+# def button_press_clear():
+#     global number
+#     global previous_number
+
+#     number = 0
+#     previous_number = 0
+
+#     entry_text.set(number)
+
+
+# функція для розрахунку результата (=)
+def button_press_result():
+    global number
+    global previous_number
+    global action
+
+    # в залежності від action - виконуємо арифметичні операції!
+    if action == "+":
+        number = previous_number + number
+    elif action == '-':
+        number = previous_number - number
+    elif action == '*':
+        number = previous_number * number
+    elif action == '/':
+        number = previous_number / number
+
+    # записуємо відповідь у поле введення
+    entry_text.set(number)
+
+
+def add_digit(digit):
+    global number
+    number = number * 10 + digit
+    entry_text.set(number)
+
+
 def button_press_1():
     add_digit(1)
+
 
 def button_press_2():
     add_digit(2)
 
+
 def button_press_3():
     add_digit(3)
+
 
 def button_press_4():
     add_digit(4)
 
+
 def button_press_5():
     add_digit(5)
+
 
 def button_press_6():
     add_digit(6)
 
+
 def button_press_7():
     add_digit(7)
+
 
 def button_press_8():
     add_digit(8)
 
+
 def button_press_9():
     add_digit(9)
 
+
 def button_press_0():
     add_digit(0)
+
 
 Button(
     my_calc,
@@ -142,16 +244,23 @@ Button(
     command=button_press_0,
 ).grid(row=4, column=1)
 
-Button(my_calc, text="=", font=font_btn, height=height_btn, width=width_btn).grid(
+Button(my_calc, text="=", font=font_btn, height=height_btn, width=width_btn, command=button_press_result).grid(
     row=4, column=0
 )
 Button(my_calc, text="AC", font=font_btn, height=height_btn, width=width_btn).grid(
     row=4, column=2
 )
 
-Button(my_calc, text="+", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=1, column=3
-)
+Button(
+    my_calc,
+    text="+",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_add,
+).grid(row=1, column=3)
+
+
 Button(my_calc, text="-", font=font_btn, height=height_btn, width=width_btn).grid(
     row=2, column=3
 )
@@ -176,7 +285,7 @@ Button(my_calc, text="Sqrt", font=font_btn, height=height_btn, width=width_btn).
 )
 
 entry_text = StringVar()
-Entry(my_calc, width=width_btn * 5, textvariable=entry_text, font=font_entry_text).grid(
+Entry(my_calc, width=width_btn * 5+10, textvariable=entry_text, font=font_entry_text).grid(
     row=0, column=0, columnspan=5
 )
 
