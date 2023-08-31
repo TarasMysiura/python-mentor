@@ -3,13 +3,13 @@ from tkinter import *
 my_calc = Tk()
 my_calc.title("Калькулятор")
 
-# Получаем ширину и высоту экрана
+# Отримуємо ширину и висоту екрану
 screen_width = my_calc.winfo_screenwidth()
 screen_height = my_calc.winfo_screenheight()
 # print(screen_width, screen_height)
 
-# Вычисляем координаты окна приложения
-window_width = 530
+# Визначаємо координати вікна додатку
+window_width = 510
 window_height = 400
 x = (screen_width // 2) - (window_width // 2)
 y = (screen_height // 2) - (window_height // 2)
@@ -18,13 +18,14 @@ my_calc.geometry(f"{window_width}x{window_height}+{x}+{y}")
 font_btn = ("Times", "30", "bold")
 font_entry_text = ("Times", "25", "bold")
 
-width_btn = int(window_width / 125)
+width_btn = int(window_width / 150)
 height_btn = int(window_height / 250)
+width_entry_text = width_btn * 6 + 5
 
-# запомним, какое число записано в поле ввода
-# изначально это ноль
+# запа, какое число записано в поле введення
+# початково це нуль
 number = 0
-# а это прошлое число в памяти - и тоже сначала ноль
+# а це попереднє число в памяті - и також спочатку нуль
 previous_number = 0
 
 # выбранное действие
@@ -32,46 +33,127 @@ previous_number = 0
 # action = '+'
 
 
-# параметр - выбранное действие
+# параметр - вибрана дія
 def make_action(chosen_action):
     global number
     global previous_number
     global action
-
-    # запоминаем выбранное действие
+    # запамятовуємо вибрану дію
     action = chosen_action
-
-    # запоминаем текущее число
+    # запамятовуємо поточне число
     previous_number = number
-
-    # и кладем ноль в текущее - пользователю нужно его ввести
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
     number = 0
-
-    # показываем текущее на экране
+    # показуємо поточне значення на екрані
     entry_text.set(str(number))
 
 
-# функция для сложения
+# функція для додавання
 def button_press_add():
-    # выбранное действие - это сложение
+    # вибранна дія - це додавання
     # make_action("+")
     global number
     global previous_number
     global action
-
-    # запоминаем выбранное действие
+    # запамятовуємо вибрану дію
     action = "+"
-
-    # запоминаем текущее число
+    # запамятовуємо поточне число
     previous_number = number
-
-    # и кладем ноль в текущее - пользователю нужно его ввести
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
     number = 0
+    # показуємо поточне значення на екрані
+    entry_text.set("")
 
-    # показываем текущее на экране
+
+# функція для віднімання
+def button_press_substract():
+    # вибранна дія - це віднімання
+    # make_action("-")
+    global number
+    global previous_number
+    global action
+    # запамятовуємо вибрану дію
+    action = "-"
+    # запамятовуємо поточне число
+    previous_number = number
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+    number = 0
+    # показуємо поточне значення на екрані
+    entry_text.set("")
+
+
+# функція для множення
+def button_press_multiply():
+    # вибранна дія - це множення
+    # make_action("*")
+    global number
+    global previous_number
+    global action
+    # запамятовуємо вибрану дію
+    action = "*"
+    # запамятовуємо поточне число
+    previous_number = number
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+    number = 0
+    # показуємо поточне значення на екрані
+    entry_text.set("")
+
+
+# функція для ділення
+def button_press_divide():
+    # вибранна дія - це ділення
+    # make_action("/")
+    global number
+    global previous_number
+    global action
+    # запамятовуємо вибрану дію
+    action = "/"
+    # запамятовуємо поточне число
+    previous_number = number
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+    number = 0
+    # показуємо поточне значення на екрані
+    entry_text.set("")
+
+
+def button_press_divide_by_whole():
+    global number
+    global previous_number
+    global action
+    action = "//"
+    # запамятовуємо поточне число
+    previous_number = number
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+    number = 0
+    # показуємо поточне значення на екрані
+    entry_text.set("")
+
+
+def button_press_fraction_from_divide_by_whole():
+    global number
+    global previous_number
+    global action
+    action = "%"
+    # запамятовуємо поточне число
+    previous_number = number
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+    number = 0
+    # показуємо поточне значення на екрані
     entry_text.set("")
     
-    
+def button_press_sqrt():
+    global number
+    global previous_number
+    global action
+    action = "√"
+    # запамятовуємо поточне число
+    # previous_number = number
+    number = number ** 0.5
+    # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+    # number = 0
+    # показуємо поточне значення на екрані
+    entry_text.set(number)
+
 
 # # функция для вычитания
 # def button_press_substract():
@@ -86,15 +168,28 @@ def button_press_add():
 # def button_press_divide():
 #     make_action('/')
 
-# # функция для очистки (AC)
-# def button_press_clear():
-#     global number
-#     global previous_number
 
-#     number = 0
-#     previous_number = 0
+# функция для очистки (AC)
+def button_press_clear():
+    global number
+    global previous_number
+    number = 0
+    previous_number = 0
+    entry_text.set(number)
 
-#     entry_text.set(number)
+
+def button_press_delete_last_symbol():
+    global number
+    global previous_number
+    number = number // 10
+    entry_text.set(number)
+
+
+def button_press_plus_minus():
+    global number
+    global previous_number
+    number = number * (-1)
+    entry_text.set(number)
 
 
 # функція для розрахунку результата (=)
@@ -102,17 +197,21 @@ def button_press_result():
     global number
     global previous_number
     global action
-
     # в залежності від action - виконуємо арифметичні операції!
     if action == "+":
         number = previous_number + number
-    elif action == '-':
+    elif action == "-":
         number = previous_number - number
-    elif action == '*':
+    elif action == "*":
         number = previous_number * number
-    elif action == '/':
+    elif action == "/":
         number = previous_number / number
-
+    elif action == "//":
+        number = previous_number // number
+    elif action == "%":
+        number = previous_number % number
+    # elif action == "√":
+        # number = previous_number ** 0.5
     # записуємо відповідь у поле введення
     entry_text.set(number)
 
@@ -244,13 +343,23 @@ Button(
     command=button_press_0,
 ).grid(row=4, column=1)
 
-Button(my_calc, text="=", font=font_btn, height=height_btn, width=width_btn, command=button_press_result).grid(
-    row=4, column=0
-)
-Button(my_calc, text="AC", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=4, column=2
-)
+Button(
+    my_calc,
+    text="=",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_result,
+).grid(row=4, column=0)
 
+Button(
+    my_calc,
+    text="AC",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_clear,
+).grid(row=4, column=2)
 Button(
     my_calc,
     text="+",
@@ -259,34 +368,95 @@ Button(
     width=width_btn,
     command=button_press_add,
 ).grid(row=1, column=3)
+Button(
+    my_calc,
+    text="-",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_substract,
+).grid(row=2, column=3)
+Button(
+    my_calc,
+    text="*",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_multiply,
+).grid(row=3, column=3)
+Button(
+    my_calc,
+    text="/",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_divide,
+).grid(row=4, column=3)
+Button(
+    my_calc,
+    text="⬅",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_delete_last_symbol,
+).grid(row=4, column=5)
+Button(
+    my_calc,
+    text="◀",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    # command=button_press_return,
+).grid(row=3, column=5)
+Button(
+    my_calc,
+    text="▶",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    # command=button_press_return,
+).grid(row=2, column=5)
+Button(
+    my_calc,
+    text="",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    # command=button_press_return,
+).grid(row=1, column=5)
 
 
-Button(my_calc, text="-", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=2, column=3
-)
-Button(my_calc, text="*", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=3, column=3
-)
-Button(my_calc, text="/", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=4, column=3
-)
-
-Button(my_calc, text="//", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=1, column=4
-)
-Button(my_calc, text="%", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=2, column=4
-)
-Button(my_calc, text="+/-", font=font_btn, height=height_btn, width=width_btn).grid(
-    row=3, column=4
-)
-Button(my_calc, text="Sqrt", font=font_btn, height=height_btn, width=width_btn).grid(
+Button(
+    my_calc,
+    text="//",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_divide_by_whole,
+).grid(row=1, column=4)
+Button(
+    my_calc,
+    text="%",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_fraction_from_divide_by_whole,
+).grid(row=2, column=4)
+Button(my_calc, text="√", font=font_btn, height=height_btn, width=width_btn, command=button_press_sqrt).grid(
     row=4, column=4
 )
+Button(
+    my_calc,
+    text="+/-",
+    font=font_btn,
+    height=height_btn,
+    width=width_btn,
+    command=button_press_plus_minus,
+).grid(row=3, column=4)
 
 entry_text = StringVar()
-Entry(my_calc, width=width_btn * 5+10, textvariable=entry_text, font=font_entry_text).grid(
-    row=0, column=0, columnspan=5
-)
+Entry(
+    my_calc, width=width_entry_text, textvariable=entry_text, font=font_entry_text
+).grid(row=0, column=0, columnspan=6)
 
 mainloop()
