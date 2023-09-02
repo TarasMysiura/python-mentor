@@ -1,143 +1,215 @@
 from tkinter import *
 
-window = Tk()
-window.title("Калькулятор")
+root = Tk()
+root.title("Calculator")
 
-# запомним, какое число записано в поле ввода
-# изначально это ноль
-number = 0
-# а это прошлое число в памяти - и тоже сначала ноль
-previous_number = 0
 
-# выбранное действие
-# пускай по-умолчанию это будет плюс
-action = '+'
+def tastare_1():
+    linie_date.insert(END, "1")
 
-# параметр - выбранное действие
-def make_action(chosen_action):
-    global number
-    global previous_number
-    global action
 
-    # запоминаем выбранное действие
-    action = chosen_action
+def tastare_2():
+    linie_date.insert(END, "2")
 
-    # запоминаем текущее число
-    previous_number = number
 
-    # и кладем ноль в текущее - пользователю нужно его ввести
-    number = 0
+def tastare_3():
+    linie_date.insert(END, "3")
 
-    # показываем текущее на экране
-    entry_text.set(str(number))
 
-# функция для сложения
-def button_press_add():
-    # выбранное действие - это сложение
-    make_action('+')
+def tastare_4():
+    linie_date.insert(END, "4")
 
-# функция для вычитания
-def button_press_substract():
-    # выбранное действие - это сложение
-    make_action('-')
 
-# функция для умножения
-def button_press_multiply():
-    make_action('*')
+def tastare_5():
+    linie_date.insert(END, "5")
 
-# функция для деления
-def button_press_divide():
-    make_action('/')
 
-# функция для очистки (AC)
-def button_press_clear():
-    global number
-    global previous_number
+def tastare_6():
+    linie_date.insert(END, "6")
 
-    number = 0
-    previous_number = 0
 
-    entry_text.set(number)
+def tastare_7():
+    linie_date.insert(END, "7")
 
-# функция для вычисления результата (=)
-def button_press_result():
-    global number
-    global previous_number
-    global action
 
-    # в зависимости от действия - делаем дело!
-    if action == '+':
-        number = previous_number + number
-    elif action == '-':
-        number = previous_number - number
-    elif action == '*':
-        number = previous_number * number
-    elif action == '/':
-        number = previous_number / number
+def tastare_8():
+    linie_date.insert(END, "8")
 
-    # записываем ответ в поле ввода
-    entry_text.set(number)
 
-# функция для ввода цифры
-def add_digit(digit):
-    # чтобы менять глобальную переменную, пишем global
-    global number
+def tastare_9():
+    linie_date.insert(END, "9")
 
-    # допишем нужную цифру справа
-    number = number * 10 + digit
 
-    # запишем число в поле ввода
-    entry_text.set(number)
+def tastare_0():
+    linie_date.insert(END, "0")
 
-def button_press_1():
-    add_digit(1)
 
-def button_press_2():
-    add_digit(2)
+def tastare_plus():
+    linie_date.insert(END, "+")
 
-def button_press_3():
-    add_digit(3)
 
-def button_press_4():
-    add_digit(4)
+def tastare_minus():
+    linie_date.insert(END, "-")
 
-def button_press_5():
-    add_digit(5)
 
-def button_press_6():
-    add_digit(6)
+def tastare_imult():
+    linie_date.insert(END, "*")
 
-def button_press_7():
-    add_digit(7)
 
-def button_press_8():
-    add_digit(8)
+def tastare_impart():
+    linie_date.insert(END, "/")
 
-def button_press_9():
-    add_digit(9)
 
-def button_press_0():
-    add_digit(0)
+def tastare_putere():
+    linie_date.insert(END, "^")
 
-Button(window, text='1', height=5, width=10, command=button_press_1).grid(row=1, column=0)
-Button(window, text='2', height=5, width=10, command=button_press_2).grid(row=1, column=1)
-Button(window, text='3', height=5, width=10, command=button_press_3).grid(row=1, column=2)
-Button(window, text='4', height=5, width=10, command=button_press_4).grid(row=2, column=0)
-Button(window, text='5', height=5, width=10, command=button_press_5).grid(row=2, column=1)
-Button(window, text='6', height=5, width=10, command=button_press_6).grid(row=2, column=2)
-Button(window, text='7', height=5, width=10, command=button_press_7).grid(row=3, column=0)
-Button(window, text='8', height=5, width=10, command=button_press_8).grid(row=3, column=1)
-Button(window, text='9', height=5, width=10, command=button_press_9).grid(row=3, column=2)
-Button(window, text='=', height=5, width=10, command=button_press_result).grid(row=4, column=0)
-Button(window, text='0', height=5, width=10, command=button_press_0).grid(row=4, column=1)
-Button(window, text='AC', height=5, width=10, command=button_press_clear).grid(row=4, column=2)
 
-Button(window, text='+', height=5, width=10, command=button_press_add).grid(row=1, column=3)
-Button(window, text='-', height=5, width=10, command=button_press_substract).grid(row=2, column=3)
-Button(window, text='*', height=5, width=10, command=button_press_multiply).grid(row=3, column=3)
-Button(window, text='/', height=5, width=10, command=button_press_divide).grid(row=4, column=3)
+def tastare_rest():
+    linie_date.insert(END, "%")
 
-entry_text = StringVar()
-Entry(window, width=40, textvariable=entry_text).grid(row=0, column=0, columnspan=4)
 
-mainloop()
+def stergere():
+    linie_date.delete(0, END)
+
+
+def calculare(semn):
+    list_arg = linie_date.get().split(semn)
+    arg1 = int(list_arg[0])
+    arg2 = int(list_arg[1])
+
+    if semn == "+":
+        rezult = arg1 + arg2
+        date = f"{arg1}+{arg2} = {rezult}"
+        linie_date.delete(0, END)
+        linie_date.insert(0, date)
+
+    if semn == "-":
+        rezult = arg1 - arg2
+        date = f"{arg1}-{arg2} = {rezult}"
+        linie_date.delete(0, END)
+        linie_date.insert(0, date)
+
+    if semn == "*":
+        rezult = arg1 * arg2
+        date = f"{arg1}*{arg2} = {rezult}"
+        linie_date.delete(0, END)
+        linie_date.insert(0, date)
+
+    if semn == "/":
+        if arg2 != 0:
+            rezult = arg1 / arg2
+            date = f"{arg1}/{arg2} = {rezult}"
+        else:
+            date = "Eroare: Impărțirea la 0"
+            linie_date.delete(0, END)
+            linie_date.insert(0, date)
+
+    if semn == "%":
+        if arg2 != 0:
+            rezult = arg1 % arg2
+            date = f"{arg1}%{arg2} = {rezult}"
+        else:
+            date = "Eroare: Impărțirea la 0"
+        linie_date.delete(0, END)
+        linie_date.insert(0, date)
+
+    if semn == "^":
+        rezult = arg1**arg2
+        date = f"{arg1} ^ {arg2} = {rezult}"
+        linie_date.delete(0, END)
+        linie_date.insert(0, date)
+
+    with open("Istorie.txt" "a") as f:
+        f.write(date + "\n")
+
+
+def afisarea_rezultat():
+    operatie = linie_date.get()
+
+    try:
+        if "+" in operatie:
+            calculare("+")
+
+        elif "-" in operatie:
+            calculare("-")
+
+        elif "*" in operatie:
+            calculare("*")
+
+        elif "/" in operatie:
+            calculare("/")
+
+        elif "%" in operatie:
+            calculare("%")
+
+        else:
+            linie_date.delete(0, END)
+            linie_date.insert(0, "Eroare: expresia  greșită")
+
+    except:
+        linie_date.delete(0, END)
+        linie_date.insert(0, "Eroare: expresia  greșită")
+
+
+antet = Label(root, text="Calculator matematic")
+antet.grid(row=0, column=0, columnspan=4, sticky="nsew", pady=3, padx=3)
+
+linie_date = Entry(root)
+linie_date.grid(row=1, column=0, columnspan=4, sticky="nsew", pady=3, padx=3)
+
+buton_1 = Button(root, text="1", width=7, height=2, command=tastare_1)
+buton_1.grid(row=2, column=0, pady=3, padx=3)
+
+buton_2 = Button(root, text="2", width=7, height=2, command=tastare_2)
+buton_2.grid(row=2, column=1, pady=3, padx=3)
+
+buton_3 = Button(root, text="3", width=7, height=2, command=tastare_3)
+buton_3.grid(row=2, column=2, pady=3, padx=3)
+
+buton_4 = Button(root, text="4", width=7, height=2, command=tastare_4)
+buton_4.grid(row=3, column=0, pady=3, padx=3)
+
+buton_5 = Button(root, text="5", width=7, height=2, command=tastare_5)
+buton_5.grid(row=3, column=1, pady=3, padx=3)
+
+buton_6 = Button(root, text="6", width=7, height=2, command=tastare_6)
+buton_6.grid(row=3, column=2, pady=3, padx=3)
+
+buton_7 = Button(root, text="7", width=7, height=2, command=tastare_7)
+buton_7.grid(row=4, column=0, pady=3, padx=3)
+
+buton_8 = Button(root, text="8", width=7, height=2, command=tastare_8)
+buton_8.grid(row=4, column=1, pady=3, padx=3)
+
+buton_9 = Button(root, text="9", width=7, height=2, command=tastare_9)
+buton_9.grid(row=4, column=2, pady=3, padx=3)
+
+buton_0 = Button(root, text="0", width=7, height=2, command=tastare_0)
+buton_0.grid(row=5, column=0, pady=3, padx=3)
+
+buton_plus = Button(root, text="+", width=7, height=2, command=tastare_plus)
+buton_plus.grid(row=3, column=3, pady=3, padx=3)
+
+buton_minus = Button(root, text="-", width=7, height=2, command=tastare_minus)
+buton_minus.grid(row=4, column=3, pady=3, padx=3)
+
+buton_imult = Button(root, text="*", width=7, height=2, command=tastare_imult)
+buton_imult.grid(row=5, column=3, pady=3, padx=3)
+
+buton_impart = Button(root, text="/", width=7, height=2, command=tastare_impart)
+buton_impart.grid(row=5, column=2, pady=3, padx=3)
+
+buton_putere = Button(root, text="^", width=7, height=2, command=tastare_putere)
+buton_putere.grid(row=6, column=3, pady=3, padx=3)
+
+buton_sterge = Button(root, text="C", width=7, height=2, command=stergere)
+buton_sterge.grid(row=2, column=3, pady=3, padx=3)
+
+buton_rest = Button(root, text="%", width=7, height=2, command=tastare_rest)
+buton_rest.grid(row=5, column=1, pady=3, padx=3)
+
+buton_egal = Button(root, text="=", height=2, command=afisarea_rezultat)
+buton_egal.grid(row=6, column=0, columnspan=3, pady=3, padx=3, sticky="nsew")
+
+
+root.mainloop()
