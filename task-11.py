@@ -3,6 +3,9 @@ from tkinter import *
 my_calc = Tk()
 my_calc.title("Калькулятор")
 my_calc.iconbitmap(default="favicon_calc.ico")
+my_calc.config(bg="red")
+my_calc.config(cursor="star")
+
 
 # Отримуємо ширину и висоту екрану
 screen_width = my_calc.winfo_screenwidth()
@@ -60,6 +63,21 @@ def button_press_add():
     number = 0
     # показуємо поточне значення на екрані
     entry_text.set("")
+    
+# def button_press_add():
+#     # вибранна дія - це додавання
+#     make_action("+")
+#     # global number
+#     # global previous_number
+#     # global action
+#     # # запамятовуємо вибрану дію
+#     # action = "+"
+#     # # запамятовуємо поточне число
+#     # previous_number = number
+#     # # і задаємо нуль, або пустий рядок в поточне - користувачу потрібно його ввести
+#     # number = 0
+#     # # показуємо поточне значення на екрані
+#     # entry_text.set("")
 
 
 # функція для віднімання
@@ -178,8 +196,7 @@ def button_press_clear():
 
 def button_press_delete_last_symbol():
     global number
-    global previous_number
-    if number > 0:
+    if number >= 0:
         number = number // 10
     else:
         number = -number // 10
@@ -190,7 +207,6 @@ def button_press_delete_last_symbol():
 
 def button_press_plus_minus():
     global number
-    global previous_number
     number = number * (-1)
     entry_text.set(number)
 
@@ -293,6 +309,14 @@ Button(
     height=height_btn,
     width=width_btn,
     command=button_press_1,
+    # cursor=True,
+    # padx=1,
+    # pady=1,
+    bd=7,
+    activebackground="light gray",
+    activeforeground="gray",
+    bg="green",
+    fg="white",
 ).grid(row=3, column=0)
 Button(
     my_calc,
