@@ -1,4 +1,6 @@
 from tkinter import *
+from decimal import *
+
 
 my_calc = Tk()
 my_calc.title("Калькулятор")
@@ -28,7 +30,7 @@ width_entry_text = width_btn * 6 + 5
 
 # запа, какое число записано в поле введення
 # початково це нуль
-number = 0
+number = Decimal(0)
 # а це попереднє число в памяті - и також спочатку нуль
 previous_number = 0
 
@@ -63,7 +65,8 @@ def button_press_add():
     number = 0
     # показуємо поточне значення на екрані
     entry_text.set("")
-    
+
+
 # def button_press_add():
 #     # вибранна дія - це додавання
 #     make_action("+")
@@ -232,30 +235,76 @@ def button_press_result():
     # записуємо відповідь у поле введення
     entry_text.set(number)
 
-
 def add_digit(digit):
-    global number
+     global activeStr
+     global Stack
+ 
+     if text == 'CE':
+          Stack.clear()
+          activeStr = ' '
+          label.configure(text = '0')
+ 
+     elif '0' <= text <= '9':
+          activeStr += text
+          label.configure(text = activeStr)
+ 
+     elif text == '.':
+          if activeStr.find('.') == -1:
+               activeStr += text
+               label.configure(text = activeStr)
+ 
+     else:
+          if len(Stack) >= 2:
+               Stack.append(label['text'])
+               Calculate()
+               Stack.clear()
+               Stack.append(label['text'])
+               activeStr = ' '
+               if text != '=':
+                    Stack.append(text)
+          else:
+               if text != '=':
+                    Stack.append(label['text'])
+                    Stack.append(text)
+                    activeStr = ' '
+                    label.configure(text = '0')
+ 
 
-    if digit == ".":
-        number = float(number)
 
-        entry_text.set(number)
-        return number
 
-    if type(number) != float:
-        if number >= 0:
-            number = number * 10 + digit
-        else:
-            number = number * 10 - digit
-    else:
-        n = len(str(number).split(".")[1])
-        print(n)
-        if number >= 0:
-            number = number + digit / (10 ** (n))
-        else:
-            number = number - digit / (10 ** (n))
+# def add_digit(digit):
+#     global number
+#     # global string_number
+#     if digit == ".":
+#         number = float(number)
 
-    entry_text.set(number)
+#         entry_text.set(number)
+#         return number
+#     n = len(str(number).split(".")[1])
+
+#     # if type(number) != float:
+#     #     if number >= 0:
+#     #         number = number * 10 + digit
+#     #     else:
+#     #         number = number * 10 - digit
+#     # else:
+#     #     # n = len(str(number).split(".")[1]) + 1
+#     #     string_number = str(number)
+#     #     # print(n)
+#     #     print(string_number)
+
+#     # if number >= 0:
+#     #     number = number + digit / (10 ** (n))
+#     # else:
+#     #     number = number - digit / (10 ** (n))
+#     number = number + digit / (10 ** (n))
+#     string_number = str(number )
+    
+#     if string_number.find(".") == -1:
+#         number = int(string_number)
+#     else:
+#         number = float(string_number)
+#     entry_text.set(string_number)
 
 
 def button_press_1():
@@ -312,11 +361,11 @@ Button(
     # cursor=True,
     # padx=1,
     # pady=1,
-    bd=7,
-    activebackground="light gray",
-    activeforeground="gray",
-    bg="green",
-    fg="white",
+    # bd=7,
+    # activebackground="light gray",
+    # activeforeground="gray",
+    # bg="green",
+    # fg="white",
 ).grid(row=3, column=0)
 Button(
     my_calc,
